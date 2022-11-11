@@ -23,7 +23,7 @@ pipeline {
 	stage ('Run'){
             steps
                 {
-                    echo 'TODO: run'          
+                    echo 'Running....'          
                 }            
         }
         stage ('Clean'){
