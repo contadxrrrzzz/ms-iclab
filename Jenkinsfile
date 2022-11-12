@@ -24,13 +24,13 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
-		sh "./mvnw clean test -e"
+				sh "./mvnw clean test -e"
             }
         }
 		stage('Building') {
             steps {
                 echo 'Testing..'
-		sh "./mvnw clean package -e"
+				sh "./mvnw clean package -e"
             }
         }
         stage('Deploy') {
