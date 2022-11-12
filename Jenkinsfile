@@ -38,8 +38,7 @@ pipeline {
                 echo 'Deploying....'
             }
         }
-
-        stage ('Clean'){
+		stage ('Clean'){
             steps
                 {
                     cleanWs()
