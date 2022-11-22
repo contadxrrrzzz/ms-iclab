@@ -42,7 +42,7 @@ pipeline {
 					tokenCredentialId: 'slack', 
 					username: 'U042FV39FMY',
 					color: COLOR_MAP [currentBuild.currentResult],
-					message: "[${env.USER}][${env.JOB_NAME}] Ejecución exitosa."
+					message: "*${currentBuild.currentResult}:* JOB[${env.JOB_NAME}] Ejecución exitosa en stage."
 			}
 
 			failure {
@@ -51,7 +51,7 @@ pipeline {
 				tokenCredentialId: 'slack', 
 				username: 'U042FV39FMY',
 				color: COLOR_MAP [currentBuild.currentResult],	
-				message: "[${env.USER}][${env.JOB_NAME}] Ejecución fallida en stage."
+				message: "*${currentBuild.currentResult}:* JOB[${env.JOB_NAME}] Ejecución fallida en stage."
 				error "Ejecución fallida en stage"
 			}
 		
