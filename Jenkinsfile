@@ -37,11 +37,20 @@ pipeline {
 	post {
 		
 		success {
-				slackSend color: 'good', message: "[${env.USER}][${env.JOB_NAME}] Ejecución exitosa."
+				slackSend channel: 'C04BXQLTZ2N',
+					teamDomain: 'diplomadodevo-izc9001', 
+				tokenCredentialId: 'slack', 
+				username: 'U042FV39FMY',
+					slackSend color: 'good', 
+					message: "[${env.USER}][${env.JOB_NAME}] Ejecución exitosa."
 			}
 
 			failure {
-				slackSend color: 'danger', message: "[${env.USER}][${env.JOB_NAME}] Ejecución fallida en stage ${STAGE}."
+				slackSend channel: 'C04BXQLTZ2N',
+				teamDomain: 'diplomadodevo-izc9001', 
+				tokenCredentialId: 'slack', 
+				username: 'U042FV39FMY',
+				slackSend color: 'danger', message: "[${env.USER}][${env.JOB_NAME}] Ejecución fallida en stage."
 				error "Ejecución fallida en stage"
 			}
 		
