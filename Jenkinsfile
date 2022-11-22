@@ -14,18 +14,12 @@ pipeline {
                 }
             }
         }
-		stage ('Ejecuta All Stages"'){
-            steps{
-                script{
-			println "Ejecuta All Stages"
-			pipeline_script.llamarPipeline()
-                   
-
-                }
-            }
-        }
-	        
 	
-	
+		
+		
+	  
+		stage ('Slack Notification'){      
+	slackSend channel: 'C04BXQLTZ2N', failOnError: true, message: 'testing', notifyCommitters: true, teamDomain: 'diplomadodevo-izc9001', tokenCredentialId: 'slack', username: 'U042FV39FMY'
+		}
 
     }
