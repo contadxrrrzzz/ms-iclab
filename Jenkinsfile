@@ -38,6 +38,7 @@ pipeline {
 		always {
 			script {
 			BUILD_USER=getBuildUser()
+			
 			}
 			slackSend channel: 'C04BXQLTZ2N',
 			color: COLOR_MAP[currentBuild.currentResult],
@@ -45,9 +46,9 @@ pipeline {
 			tokenCredentialId: 'slack',
 			username: 'U042FV39FMY',
 				message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} por ${BUILD_USER}"
-		}
 		
-		}
+		
+			}
 	
-	}
+		}
 }
