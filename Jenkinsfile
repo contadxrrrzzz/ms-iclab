@@ -39,9 +39,9 @@ pipeline {
 		success {
 				slackSend channel: 'C04BXQLTZ2N',
 					teamDomain: 'diplomadodevo-izc9001', 
-				tokenCredentialId: 'slack', 
-				username: 'U042FV39FMY',
-					slackSend color: 'good', 
+					tokenCredentialId: 'slack', 
+					username: 'U042FV39FMY',
+					color: COLOR_MAP [currentBuild.currentResult],
 					message: "[${env.USER}][${env.JOB_NAME}] Ejecución exitosa."
 			}
 
@@ -50,7 +50,8 @@ pipeline {
 				teamDomain: 'diplomadodevo-izc9001', 
 				tokenCredentialId: 'slack', 
 				username: 'U042FV39FMY',
-				slackSend color: 'danger', message: "[${env.USER}][${env.JOB_NAME}] Ejecución fallida en stage."
+				color: COLOR_MAP [currentBuild.currentResult],	
+				message: "[${env.USER}][${env.JOB_NAME}] Ejecución fallida en stage."
 				error "Ejecución fallida en stage"
 			}
 		
