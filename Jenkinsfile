@@ -35,7 +35,7 @@ pipeline {
 		
 }
 	post {
-		always {
+		
 			script {
 			BUILD_USER=getBuildUser()
 			
@@ -45,10 +45,10 @@ pipeline {
 			teamDomain: 'diplomadodevo-izc9001',
 			tokenCredentialId: 'slack',
 			username: 'U042FV39FMY',
-				message: '*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} por ${BUILD_USER}'
+				message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} por ${BUILD_USER}"
 		
 		
 			}
 	
-		}
+		
 }
