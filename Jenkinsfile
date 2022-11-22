@@ -35,7 +35,7 @@ pipeline {
 		
 }
 	post {
-		
+		always{
 			script {
 			BUILD_USER=getBuildUser()
 			
@@ -49,6 +49,6 @@ pipeline {
 		
 		
 			}
-	
+	}
 		
 }
