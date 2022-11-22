@@ -35,20 +35,19 @@ pipeline {
 		
 }
 	post {
-		always{
-			script {
-			BUILD_USER=getBuildUser()
-			
+		
+		success {
+				slackSend color: 'good', message: "[${env.USER}][${env.JOB_NAME}] Ejecución exitosa."
 			}
-			slackSend channel: 'C04BXQLTZ2N',
-			color: COLOR_MAP[currentBuild.currentResult],
-			teamDomain: 'diplomadodevo-izc9001',
-			tokenCredentialId: 'slack',
-			username: 'U042FV39FMY',
-				message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} por ${BUILD_USER}"
+
+			failure {
+				slackSend color: 'danger', message: "[${env.USER}][${env.JOB_NAME}] Ejecución fallida en stage ${STAGE}."
+				error "Ejecución fallida en stage ${env.STAGE}"
+			}
 		
 		
-			}
+		
+		
 	}
 		
 }
