@@ -44,10 +44,10 @@ pipeline {
 			teamDomain: 'diplomadodevo-izc9001',
 			tokenCredentialId: 'slack',
 			username: 'U042FV39FMY',
-				message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} por ${BUILD_USER} Stage ${env.STAGE_NAME}\n"
+				message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} por ${BUILD_USER} Stage ${env.STAGE_NAME}"
 		
 		
 		}
 	
-	}
+	}}
 }
