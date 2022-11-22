@@ -20,7 +20,7 @@ stage('TestApp') {
     }
   }
    
-  stage ('Sonarqube Analisis) {
+  stage ('Sonarqube Analisis') {
     withSonarQubeEnv('Sonar'){
 		sh 'mvn clean package sonar:sonar'
     }
