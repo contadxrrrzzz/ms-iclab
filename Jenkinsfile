@@ -18,8 +18,10 @@ pipeline {
 		
 		
 	  
-		stage ('Slack Notification'){      
+		stage ('Slack Notification'){   
+			steps{
 	slackSend channel: 'C04BXQLTZ2N', failOnError: true, message: 'testing', notifyCommitters: true, teamDomain: 'diplomadodevo-izc9001', tokenCredentialId: 'slack', username: 'U042FV39FMY'
+		}
 		}
 
     }
