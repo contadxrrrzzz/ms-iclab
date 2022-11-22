@@ -3,15 +3,6 @@ import helpers.*
 def llamarPipeline()
 {
 
-figlet 'Maven'
-stage('Tag to Master'){
-    STAGE = env.STAGE_NAME
-    figlet "Stage: ${env.STAGE_NAME}"
-
-  
-  }	
-	
-
 stage('Compile') {
       sh './mvnw clean compile -e'
      }
