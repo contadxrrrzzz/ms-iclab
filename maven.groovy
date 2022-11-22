@@ -14,10 +14,7 @@ stage('Compile') {
     sh 'nohup bash mvnw spring-boot:run &'
   sleep 20
    }
-    stage('TestApp') {
-     STAGE = env.STAGE_NAME
-      sh "curl -X GET 'http://localhost:8081/rest/mscovid/test?msg=testing'"
-  }
+   
   stage ('Sonarqube Analisis) {
     withSonarQubeEnv('Sonar'){
 		sh 'mvn clean package sonar:sonar'
