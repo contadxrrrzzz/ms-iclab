@@ -19,9 +19,7 @@ pipeline {
 		
 		
 	  
-		stage ('Slack Notification'){   
-			steps{
-
+		
 			
 	post {
 			success {
@@ -33,11 +31,7 @@ pipeline {
 				error "Ejecución fallida en stage ${STAGE}"
 			}
 		}
-				}
-			
-			
-			
-		}
+				
 
     }
 }
