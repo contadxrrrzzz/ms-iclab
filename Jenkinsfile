@@ -42,7 +42,7 @@ pipeline {
 
 			failure {
 				slackSend color: 'danger', message: "[${env.USER}][${env.JOB_NAME}] Ejecución fallida en stage ${STAGE}."
-				error "Ejecución fallida en stage ${env.STAGE}"
+				error "Ejecución fallida en stage"
 			}
 		
 		
