@@ -18,6 +18,7 @@ stage('TestApp') {
 
  sh "curl -X GET 'http://localhost:8081/rest/mscovid/test?msg=testing'"
 }
+}
   
    
   stage ('Sonarqube Analisis') {
