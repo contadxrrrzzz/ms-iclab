@@ -1,5 +1,5 @@
 def llamarPipeline()
-{
+
 
 stage('Compile') {
       sh './mvnw clean compile -e'
