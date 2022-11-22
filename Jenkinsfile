@@ -1,3 +1,4 @@
+import helpers.*
 def pipeline_script
 
 pipeline {
