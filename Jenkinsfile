@@ -1,49 +1,31 @@
+def pipeline_script
+
 pipeline {
     agent any
+	
 	stages {
-        stage('SonarQube analysis') {
+
+        stage ('Load Scripts'){
             steps{
-                withSonarQubeEnv('Sonar') {
-					sh 'mvn clean package sonar:sonar'
+                script{
+                    pipeline_script= load "maven.groovy"
+                   
+
                 }
             }
         }
-        stage("Quality Gate") {
-            steps {
-                timeout(time: 1, unit: 'HOURS') {
-                    waitForQualityGate abortPipeline: true
+		stage ('Ejecuta All Stages"'){
+            steps{
+                script{
+			println "Ejecuta All Stages"
+			pipeline_script.llamarPipeline()
+                   
+
                 }
             }
         }
-        stage('Compile') {
-            steps {
-                echo 'Compile..'
-                sh "./mvnw clean compile -e"
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-				sh "./mvnw clean test -e"
-            }
-        }
-		stage('Building') {
-            steps {
-                echo 'Testing..'
-				sh "./mvnw clean package -e"
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
-		stage ('Clean'){
-            steps
-                {
-                    cleanWs()
-                }
-        }
+	        
+	
+	
 
     }
-}
