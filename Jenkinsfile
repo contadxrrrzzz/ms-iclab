@@ -21,16 +21,7 @@ pipeline {
 	  
 		
 			
-	post {
-			success {
-				slackSend channel: 'C04BXQLTZ2N',  notifyCommitters: true, teamDomain: 'diplomadodevo-izc9001', tokenCredentialId: 'slack', username: 'U042FV39FMY', message: "[${env.USER}][${env.JOB_NAME}] Ejecución exitosa."
-			}
-
-			failure {
-				slackSend channel: 'C04BXQLTZ2N', notifyCommitters: true, teamDomain: 'diplomadodevo-izc9001', tokenCredentialId: 'slack', username: 'U042FV39FMY', message: "[${env.USER}][${env.JOB_NAME}] Ejecución fallida en stage ${STAGE}."
-				error "Ejecución fallida en stage ${STAGE}"
-			}
-		}
+	
 				
 
     }
