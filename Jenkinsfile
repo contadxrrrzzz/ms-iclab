@@ -19,7 +19,7 @@ pipeline {
 	//Se declara en Enviroment el usuario
 	environment{
 	BUILD_USER = ''
-	STAGE= ''	
+		
 	}
 	
 	stages {
@@ -53,7 +53,7 @@ pipeline {
 				tokenCredentialId: 'slack', 
 				username: 'U042FV39FMY',
 				color: COLOR_MAP [currentBuild.currentResult],	
-					message: "*${currentBuild.currentResult}:* JOB[${env.JOB_NAME}] Ejecución fallida en stage.${STAGE}"
+					message: "*${currentBuild.currentResult}:* JOB[${env.JOB_NAME}] Ejecución fallida en stage."
 				error "Ejecución fallida en stage"
 			}
 		
