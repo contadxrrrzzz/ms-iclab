@@ -45,6 +45,37 @@ pipeline {
                 }
             }
         }
+		 stage('uploadNexus') { 
+            steps {
+                
+                script{
+                    def tag = extraeTag()
+                    stg = "uploadNexus"
+
+                    echo 'Uploading Nexus'
+                  
+	             nexusPublisher nexusInstanceId: 'nsx01', nexusRepositoryId: 'lab4-e4', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "/var/jenkins_home/workspace/lab4-e4-local_master/build/DevOpsUsach2020-${tag}.jar"]], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: "${tag}"]]]
+                    
+                
+                }
+                echo "${stg}"
+            }
+            
+        }
+        stage ('Testing Artifact'){
+            steps
+                {
+                    script{
+                        stg = "Testing Artifact"
+                    }
+                    echo 'Testing Artifact'
+                    sh 'curl -X GET -u admin:admin http://nexus:8081/repository/lab4-e4-local/com.devopsusachs2020.DevOpsUsach2020.0.0.1.jar -O'
+                    echo "${stg}"
+                }
+                
+        }
+           
+    }
 	
 		
 }
@@ -55,8 +86,7 @@ pipeline {
 					teamDomain: 'diplomadodevo-izc9001', 
 					tokenCredentialId: 'slack', 
 					username: 'U042FV39FMY',
-					color: COLOR_MAP [currentBuild.currentResult],
-					message: "*${currentBuild.currentResult}:* JOB[${env.JOB_NAME}] Ejecución exitosa en stage."
+					message: "${custom_msg()} [STAGE: ${stg}][RESULTADO: EXITO]"
 			}
 
 			failure {
@@ -64,8 +94,7 @@ pipeline {
 				teamDomain: 'diplomadodevo-izc9001', 
 				tokenCredentialId: 'slack', 
 				username: 'U042FV39FMY',
-				color: COLOR_MAP [currentBuild.currentResult],	
-					message: "*${currentBuild.currentResult}:* JOB[${env.JOB_NAME}] Ejecución fallida en stage."
+				message: "${custom_msg()} [STAGE: ${stg}][RESULTADO: ERROR]",
 				error "Ejecución fallida en stage"
 			}
 		
@@ -90,8 +119,8 @@ def custom_msg()
 def extraeTag()
 {   
     sh "git pull"
-    sh "ls ${env.WORKSPACE}/.git/refs/tags/ > /var/jenkins_home/trabajo/tag.txt"
-    def tag = sh(script: "cat /var/jenkins_home/trabajo/tag.txt", returnStdout: true).toString().trim()
+    sh "ls ${env.WORKSPACE}/.git/refs/tags/ > /var/jenkins_home/workspace/lab4-e4-local_master/tag.txt"
+    def tag = sh(script: "cat /var/jenkins_home/workspace/lab4-e4-local_master/tag.txt", returnStdout: true).toString().trim()
     largo = tag.length()
     def resultado = tag.substring(largo-5, largo)
     return resultado
@@ -99,8 +128,8 @@ def extraeTag()
 def tagAntiguo()
 {   
     sh "git pull"
-    sh "ls ${env.WORKSPACE}/.git/refs/tags/ > /var/jenkins_home/trabajo/tag.txt"
-    def tag = sh(script: "cat /var/jenkins_home/trabajo/tag.txt", returnStdout: true).toString().trim()
+    sh "ls ${env.WORKSPACE}/.git/refs/tags/ > //var/jenkins_home/workspace/lab4-e4-local_master/tag.txt"
+    def tag = sh(script: "cat /var/jenkins_home/workspace/lab4-e4-local_master/tag.txt", returnStdout: true).toString().trim()
     largo = tag.length()
     def resultado = tag.substring(largo-11, largo-6)
     return resultado
@@ -122,7 +151,7 @@ def aumentarVersion()
     def vActual = tagAntiguo()
     vActual = "${vActual}"
     def vNuevo = "${tg}"
-    sh "/var/jenkins_home/trabajo/cambioTag.sh ${vActual} ${vNuevo} ${env.WORKSPACE}"
+    sh "/var/jenkins_home/workspace/lab4-e4-local_master/cambioTag.sh ${vActual} ${vNuevo} ${env.WORKSPACE}"
     script{
         if("${branch}" == 'develop'){
             echo "Entro a if develop"
