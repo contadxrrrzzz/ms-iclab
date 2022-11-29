@@ -94,8 +94,7 @@ pipeline {
 				teamDomain: 'diplomadodevo-izc9001', 
 				tokenCredentialId: 'slack', 
 				username: 'U042FV39FMY',
-				message: "${custom_msg()} [STAGE: ${stg}][RESULTADO: ERROR]",
-				error "Ejecución fallida en stage"
+				message: "${custom_msg()} [STAGE: ${stg}][RESULTADO: ERROR]"
 			}
 		
 		
