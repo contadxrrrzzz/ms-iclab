@@ -127,7 +127,7 @@ def extraeTag()
 def tagAntiguo()
 {   
     sh "git pull"
-    sh "ls ${env.WORKSPACE}/.git/refs/tags/ > //var/jenkins_home/workspace/lab4-e4-local_master/tag.txt"
+    sh "ls ${env.WORKSPACE}/.git/refs/tags/ > /var/jenkins_home/workspace/lab4-e4-local_master/tag.txt"
     def tag = sh(script: "cat /var/jenkins_home/workspace/lab4-e4-local_master/tag.txt", returnStdout: true).toString().trim()
     largo = tag.length()
     def resultado = tag.substring(largo-11, largo-6)
