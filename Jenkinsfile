@@ -118,19 +118,30 @@ def custom_msg()
 def extraeTag()
 {   
     sh "git pull"
-    sh "ls ${env.WORKSPACE}/.git/refs/tags/ > /var/jenkins_home/workspace/lab4-e4-local_master/tag.txt"
-    def tag = sh(script: "cat /var/jenkins_home/workspace/lab4-e4-local_master/tag.txt", returnStdout: true).toString().trim()
+    sh "ls ${env.WORKSPACE}/.git/refs/tags/ > ${env.WORKSPACE}/trabajo/tag.txt"
+    def tag = sh(script: "cat ${env.WORKSPACE}/trabajo/tag.txt", returnStdout: true).toString().trim()
+	echo tag
     largo = tag.length()
     def resultado = tag.substring(largo-5, largo)
     return resultado
 }
 def tagAntiguo()
 {   
+    def resultado
     sh "git pull"
-    sh "ls ${env.WORKSPACE}/.git/refs/tags/ > /var/jenkins_home/workspace/lab4-e4-local_master/tag.txt"
-    def tag = sh(script: "cat /var/jenkins_home/workspace/lab4-e4-local_master/tag.txt", returnStdout: true).toString().trim()
+    sh "ls ${env.WORKSPACE}/.git/refs/tags/ > ${env.WORKSPACE}/trabajo/tag.txt"
+    def tag = sh(script: "cat ${env.WORKSPACE}/trabajo/tag.txt", returnStdout: true).toString().trim()
     largo = tag.length()
-    def resultado = tag.substring(largo-11, largo-6)
+	echo tag
+    script{
+        if(largo >= 6){
+            resultado = tag.substring(largo-11, largo-6)
+        }
+        if(largo == 5){
+            resultado = tag.substring(largo-5, largo)
+        }
+
+    }
     return resultado
 }
 def obtenerAutor()
@@ -150,18 +161,9 @@ def aumentarVersion()
     def vActual = tagAntiguo()
     vActual = "${vActual}"
     def vNuevo = "${tg}"
-    sh "/var/jenkins_home/workspace/lab4-e4-local_master/cambioTag.sh ${vActual} ${vNuevo} ${env.WORKSPACE}"
-    script{
-        if("${branch}" == 'develop'){
-            echo "Entro a if develop"
-        } else if("${branch}" == 'main'){
-            echo "Entro a if main."
-        } else if("${branch}" == 'feature*' || "${branch}" == 'release*' ){
-            echo "Entro a if."
-        }
-    }
+    sh "${env.WORKSPACE}/trabajo/cambioTag.sh ${vActual} ${vNuevo} ${env.WORKSPACE}"
+
     return vNuevo
 }
-
 
 
