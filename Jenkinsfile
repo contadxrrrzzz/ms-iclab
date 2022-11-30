@@ -10,15 +10,7 @@ pipeline {
 	
 	stages {
 		
-		    stage ('Load Scripts'){
-            steps{
-                script{
-                    pipeline_script= load "maven.groovy"
-                   
-
-                }
-            }
-        }
+		
 	
 		stage('Version') { 
             steps {
@@ -40,7 +32,7 @@ pipeline {
                     stg = "uploadNexus"
 
                     echo 'Uploading Nexus'
-                  
+                   echo "${env.WORKSPACE}/build/DevOpsUsach2020-${tag}.jar"
 	             nexusPublisher nexusInstanceId: 'nsx01', nexusRepositoryId: 'lab4-e4-local', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "/var/jenkins_home/workspace/lab4-e4-local_master/build/DevOpsUsach2020-${tag}.jar"]], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: "${tag}"]]]
                     
                 
@@ -152,5 +144,4 @@ def aumentarVersion()
 
     return vNuevo
 }
-
 
