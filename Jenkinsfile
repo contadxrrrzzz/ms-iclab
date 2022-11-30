@@ -1,27 +1,12 @@
-import groovy.json.JsonOutput	
 def pipeline_script
 def stg = ""
 
-//Se define el color de SLACK
-def COLOR_MAP = [
-	'SUCCESS' : 'good',
-	'FAILURE' : 'danger'
-]
 
-//Se obtienen los datos del user
-def getBuildUser(){
-return currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
-}
 
 pipeline {
 	
     agent any
 	
-	//Se declara en Enviroment el usuario
-	environment{
-	BUILD_USER = ''
-		
-	}
 	
 	stages {
 	
