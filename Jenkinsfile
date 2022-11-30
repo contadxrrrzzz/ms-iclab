@@ -9,6 +9,16 @@ pipeline {
 	
 	
 	stages {
+		
+		    stage ('Load Scripts'){
+            steps{
+                script{
+                    pipeline_script= load "maven.groovy"
+                   
+
+                }
+            }
+        }
 	
 		stage('Version') { 
             steps {
@@ -21,15 +31,7 @@ pipeline {
             
         }
 
-        stage ('Load Scripts'){
-            steps{
-                script{
-                    pipeline_script= load "maven.groovy"
-                   
-
-                }
-            }
-        }
+    
 		 stage('uploadNexus') { 
             steps {
                 
